@@ -1,13 +1,14 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/style.css';
-import Todo from './components/Todo';
+import Todo from './comps';
 
-
-export default function App() {
+const App = () => {
   return (
     <>
-    <Todo/>
+      <h2 className="text-center text-secondary">Add Clients</h2>
+      <Todo />
     </>
   )
 }
+
+export default App;
