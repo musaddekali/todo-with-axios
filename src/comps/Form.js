@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalContext } from "../context/context";
 import Alert from "./Alert";
 
@@ -20,30 +20,30 @@ export default function Form() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const newClient = { ...client, id: Date.now() };
-        handleSubmit(newClient);
+        // const newClient = { ...client, id: Date.now() };
+        handleSubmit(client);
         if (client.name && client.job) {
             setClient(inSt);
         }
     }
 
-    const handleEditData = () => {
+    const handleEditData = useCallback(() => {
         setClient({ name: editingItem.name, job: editingItem.job });
-    }
+    }, [editingItem]);
 
     useEffect(() => {
         // set edit item data in form when editMode is on 
         if (editMode) {
             handleEditData()
         }
-    }, [editMode]);
+    }, [editMode, handleEditData]);
 
     const { name, job } = client;
 
     return (
         <>
             <form onSubmit={handleFormSubmit}>
-                <Alert/>
+                <Alert />
                 <input
                     onChange={onFormDataChange}
                     type="text"
